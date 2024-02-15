@@ -1,16 +1,53 @@
 import React, { useState } from 'react'
+import background from "../assets/image/bg2.jpg";
+import { ApiGetMe, ApiLogin } from '../services/authService';
+import { useNavigate } from 'react-router'
+import { ErrorCommonAxios } from '../axios/ErrorCommonAxios';
+import toast from 'react-hot-toast';
+import Cookies from 'universal-cookie';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../redux/slice/AuthSlice';
 
+const cookies = new Cookies()
 export default function Login() {
+  var navigate = useNavigate();
+  const dispatch = useDispatch()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle login logic here
-    console.log('Logging in with:', email, password);
+    ApiLogin({
+      "userName": email,
+      "password": password
+    })
+    .then(data => {
+      try {
+        cookies.set('access_token', data['result']['token']) //path=/;domain=localhost
+        ApiGetMe()
+        .then(data => {
+          dispatch(setUser(data))
+        })
+        .catch(error => {
+          ErrorCommonAxios(error)
+        })
+        navigate('/home')
+      } catch (error) {
+        console.log('errorSetCookie: ' + error)
+      }
+    })
+    .catch(error => {
+      ErrorCommonAxios(error)
+    })
+    
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div style={{
+      backgroundImage: `url(${background})`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundSize: 'cover'
+    }} className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
         <h2 className="text-2xl font-bold mb-6">Log In</h2>
         <form onSubmit={handleSubmit}>

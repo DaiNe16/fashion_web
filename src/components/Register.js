@@ -1,18 +1,47 @@
 import React, { useState } from 'react';
+import background from "../assets/image/bg2.jpg";
+import { ApiRegister } from '../services/authService';
+import toast from 'react-hot-toast';
+import { ErrorCommonAxios } from '../axios/ErrorCommonAxios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
+  const navigate = useNavigate()
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+
   const handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle registration logic here
-    console.log('Registering with:', fullName, email, password, confirmPassword);
+    if(password != confirmPassword){
+      console.log('123')
+      toast.error("Password must be equal confirmPassword")
+    }else{
+      event.preventDefault();
+      ApiRegister({
+        "email": email,
+        "name": fullName,
+        "phoneNumber": "",
+        "password": password,
+        "role": ""
+      })
+      .then(data => {
+        toast.success(data?.result)
+        navigate('/login')
+      })
+      .catch(error => {
+        ErrorCommonAxios(error)
+      })
+    }
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div style={{
+      backgroundImage: `url(${background})`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundSize: 'cover'
+    }} className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
         <h2 className="text-2xl font-bold mb-6">Register</h2>
         <form onSubmit={handleSubmit}>
