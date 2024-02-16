@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ApiGetAll, ApiGetAllCategory, ApiGetAllProductBySubCategoryId, ApiGetAllSubCategory, ApiGetAllSubCategoryByCategoryId } from '../services/productsService';
 import { ErrorCommonAxios } from '../axios/ErrorCommonAxios';
+import { useNavigate } from 'react-router-dom';
 
 const Product = () => {
+  const navigate = useNavigate()
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([])
   const [subCategories, setSubCategories] = useState([])
@@ -101,6 +103,10 @@ const Product = () => {
     }
   }
 
+  const handleClickProduct = (id) => {
+    navigate('/productDetail?id='+id)
+  }
+
   return (
     <div  className='pt-40 pb-80 pl-20 pr-20'>
         {/* Filter product */}
@@ -145,7 +151,7 @@ const Product = () => {
             <h1 className="text-3xl font-bold mb-4">All Products</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {products.map(product => (
-                <div key={product.productId} className="bg-white p-4 rounded-md shadow-md">
+                <div style={{cursor: 'pointer'}} onClick={() => handleClickProduct(product['productId'])} key={product.productId} className="bg-white p-4 rounded-md shadow-md">
                     <img src={product.productUrl} alt={product.productName} className="w-full h-full object-cover mb-4" />
                     <h2 className="text-xl font-semibold mb-2">{product.productName}</h2>
                     <p className="text-gray-600">${product.productPrice}</p>

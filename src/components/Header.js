@@ -28,7 +28,32 @@ export default function Header() {
           <a href="/" className="text-xl font-bold">
             Fashion Store
           </a>
+          
         </div>
+        {user?.roles?.includes('admin') && <>
+          <Link
+            to="/manageCoupon"
+          >
+              ManageCoupon
+          </Link>
+          <Link
+            to="/manageCategory"
+          >
+              ManageCategory
+          </Link>
+          <Link
+            to="/manageSubCategory"
+          >
+              ManageSubCategory
+          </Link>
+          <Link
+            to="/manageProduct"
+          >
+              ManageProduct
+          </Link>
+        
+        </>}
+
         <nav>
           <ul className="flex items-center space-x-6">
             <Link
@@ -41,11 +66,7 @@ export default function Header() {
             >
                 Products
             </Link>
-            <Link
-              to="/cart"
-            >
-                Cart
-            </Link>
+            
             {
               user['email'] == null ?<>
                   <Link
@@ -60,6 +81,16 @@ export default function Header() {
                   </Link>
                 </>
               : <>
+              <Link
+                to="/cart"
+              >
+                Cart
+              </Link>
+              <Link
+                to="/order"
+              >
+                Order
+              </Link>
                 <div>Hello {user['name']}</div>
                 <Link
                     onClick={() => handleLogout()}
