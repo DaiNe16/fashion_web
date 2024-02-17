@@ -5,6 +5,37 @@ const ApiGetAll = () => {
     return axios.get(`api/product/GetAll`)
 }
 
+const ApiCreateProduct = (data) => {
+    return axios.post(`api/product/CreateProduct`, data, {
+        headers: {
+        'Content-Type': 'application/json'
+        }
+    })
+}
+
+
+const ApiUploadProductImage = (productId, data) => {
+    return axios.post(`api/product/UploadProductImage/${productId}`, data, {
+        headers: {
+        'Content-Type': 'multipart/form-data'
+        }
+    })
+}
+
+const ApiUpdateProduct = (data) => {
+    return axios.put(`api/product/UpdateProduct`, data, {
+        headers: {
+        'Content-Type': 'application/json'
+        }
+    })
+}    
+
+const ApiDeleteProduct = (id) => {
+    return axios.delete(`api/product/DeleteProduct/${id}`)
+}
+
+
+
 const ApiGetAllCategory = () => {
     return axios.get(`api/category/GetAll`)
 }
@@ -33,6 +64,26 @@ const ApiGetAllSubCategory = () => {
     return axios.get(`api/SubCategory/GetAll`)
 }
 
+const ApiCreateSubCategory = (data) => {
+    return axios.post(`api/SubCategory/CreateSubCategory`, data, {
+        headers: {
+        'Content-Type': 'application/json'
+        }
+    })
+}
+
+const ApiUpdateSubCategory = (data) => {
+    return axios.put(`api/SubCategory/UpdateSubCategory`, data, {
+        headers: {
+        'Content-Type': 'application/json'
+        }
+    })
+}
+
+const ApiDeleteSubCategory = (id) => {
+    return axios.delete(`api/SubCategory/DeleteSubCategory/${id}`)
+}
+
 const ApiGetAllSubCategoryByCategoryId = (id) => {
     return axios.get(`api/SubCategory/GetAllSubCategoryByCategoryId/`+id)
 }
@@ -55,4 +106,11 @@ export { ApiGetAll,
     ApiGetAllProductById,
     ApiCreateCategory,
     ApiUpdateCategory,
-    ApiDeleteCategory }
+    ApiDeleteCategory,
+    ApiCreateSubCategory,
+    ApiUpdateSubCategory,
+    ApiDeleteSubCategory,
+    ApiCreateProduct,
+    ApiUpdateProduct,
+    ApiDeleteProduct,
+    ApiUploadProductImage }

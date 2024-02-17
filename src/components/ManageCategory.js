@@ -61,7 +61,7 @@ export default function ManageCategory() {
         })
       }
       setCategoryForm({
-        categoryId: null,
+        categoryId: 0,
         categoryName: ''
       });
     };

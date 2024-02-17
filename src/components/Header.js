@@ -91,6 +91,11 @@ export default function Header() {
               >
                 Order
               </Link>
+              <Link
+                to="/chat"
+              >
+                Chat
+              </Link>
                 <div>Hello {user['name']}</div>
                 <Link
                     onClick={() => handleLogout()}

@@ -13,6 +13,10 @@ const ApiGetMe = () => {
     return axios.get(`api/auth/GetMe`)
 }
 
+const ApiGetAllUser = () => {
+    return axios.get(`api/auth/GetAllUser`)
+}
+
 const ApiRegister = (data) => {
     return axios.post(`api/auth/Register`, data, {
         headers: {
@@ -29,4 +33,4 @@ const ApiUpdateAvatar = (data) => {
     })
 }
 
-export { ApiLogin, ApiGetMe, ApiRegister, ApiUpdateAvatar }
+export { ApiLogin, ApiGetMe, ApiRegister, ApiUpdateAvatar, ApiGetAllUser }

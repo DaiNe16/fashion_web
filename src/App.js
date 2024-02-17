@@ -13,6 +13,9 @@ import ProductDetailScreen from './screens/ProductDetailScreen';
 import CartScreen from './screens/CartScreen';
 import CouponScreen from './screens/CouponScreen';
 import ManageCategoryScreen from './screens/ManageCategoryScreen';
+import ManageSubCategoryScreen from './screens/ManageSubCategoryScreen';
+import ManageProductScreen from './screens/ManageProductScreen';
+import ChatScreen from './screens/ChatScreen';
 
 function App() {
   const count = useSelector((state) => state.counter.value)
@@ -34,6 +37,9 @@ function App() {
           <Route path="cart" element={<CartScreen />} />
           <Route path="manageCoupon" element={<CouponScreen />} />
           <Route path="manageCategory" element={<ManageCategoryScreen />} />
+          <Route path="manageSubCategory" element={<ManageSubCategoryScreen />} />
+          <Route path="manageProduct" element={<ManageProductScreen />} />
+          <Route path="chat" element={<ChatScreen />} />
         </Route>
       </Routes>
     </BrowserRouter>
